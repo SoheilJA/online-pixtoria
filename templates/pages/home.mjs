@@ -243,17 +243,15 @@ export function homeMain ({ services, featuredProjects, latestPosts }) {
   <section class="section" aria-label="سوالات پرتکرار">
     <span class="cross-tl" aria-hidden="true">+</span>
     <span class="cross-tr" aria-hidden="true">+</span>
-    <div class="wrap py-16 md:py-20">
-      <div class="grid gap-10 lg:grid-cols-[320px_1fr]">
-        <div>
-          ${secHead({
-            num: '۱۱',
-            label: 'سوالات پرتکرار',
-            en: 'FAQ',
-            title: 'پاسخ سوال‌های رایج',
-            desc: 'اگر پاسخ سوال‌تان اینجا نبود، بپرسید — سریع جواب می‌دهیم.'
-          })}
-        </div>
+    <div class="wrap">
+      ${secHead({
+        num: '۱۱',
+        label: 'سوالات پرتکرار',
+        en: 'FAQ',
+        title: 'پاسخ سوال‌های رایج',
+        desc: 'اگر پاسخ سوال‌تان اینجا نبود، بپرسید — سریع جواب می‌دهیم.'
+      })}
+      <div class="max-w-3xl pb-20">
         ${faqList(FAQ_HOME)}
       </div>
     </div>
