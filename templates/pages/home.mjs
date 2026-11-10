@@ -142,7 +142,7 @@ export function homeMain ({ services, featuredProjects, latestPosts }) {
         title: 'از ایده تا تحویل',
         desc: 'فرآیند شفاف و مکتوب؛ در هر مرحله می‌دانید کجای کار ایستاده‌اید.'
       })}
-      <div class="max-w-3xl pb-20">
+      <div class="max-w-3xl mx-auto pb-20">
         ${timeline(PROCESS)}
       </div>
     </div>
