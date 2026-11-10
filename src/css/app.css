@@ -1,0 +1,251 @@
+/* ==========================================================================
+   PIXORIA — Design System (Tailwind CSS v4, CSS-first config)
+   Dark editorial / brutalist · near-black · warm orange accent
+   ========================================================================== */
+
+@import "tailwindcss";
+@import "./components.css";
+@import "./animations.css";
+
+/* --------------------------------------------------------------------------
+   Design tokens
+   -------------------------------------------------------------------------- */
+@theme {
+  /* surfaces */
+  --color-bg: #0d0d0d;
+  --color-surface: #111111;
+  --color-elevated: #171717;
+  --color-surface2: #1d1d1d;
+  --color-deep: #0a0a0a;
+
+  /* text */
+  --color-ink: #f2f0eb;
+  --color-ink2: #a5a5a5;
+  --color-ink3: #8a8a8a; /* lifted from #777 for contrast on dark (see DESIGN_SYSTEM.md) */
+
+  /* lines */
+  --color-line: #303030;
+  --color-line2: #222222;
+
+  /* accent */
+  --color-accent: #ff5a00;
+  --color-accent2: #e84e00;
+  --color-accentsoft: #ff7a36;
+
+  /* type */
+  --font-sans: "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* fluid type scale */
+  --text-display: clamp(2.6rem, 7.2vw, 5.5rem);
+  --text-display--line-height: 1.15;
+  --text-h1: clamp(2.1rem, 5vw, 4rem);
+  --text-h1--line-height: 1.2;
+  --text-h2: clamp(1.75rem, 3.8vw, 3rem);
+  --text-h2--line-height: 1.25;
+  --text-h3: clamp(1.35rem, 2.4vw, 2rem);
+  --text-h3--line-height: 1.35;
+  --text-body-lg: clamp(1.05rem, 1.5vw, 1.25rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+
+  /* geometry */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+
+  /* layout */
+  --spacing-gutter: 1.25rem;
+
+  --shadow-card: 0 24px 48px -24px rgb(0 0 0 / 0.55);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Self-hosted Vazirmatn (OFL) — font-display: swap
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+@layer base {
+  * {
+    min-width: 0; /* flex children never blow out the layout */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.8;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #0d0d0d;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  summary { list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+
+  /* thin dark scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--color-line); border: 2px solid var(--color-bg); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+  /* film grain — very subtle, fixed, non-interactive */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Utilities / primitives
+   -------------------------------------------------------------------------- */
+@utility wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .wrap { padding-inline: 2.5rem; }
+}
+@media (min-width: 1280px) {
+  .wrap { padding-inline: 4rem; }
+}
+
+@utility mono-ltr {
+  font-family: var(--font-mono);
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-feature-settings: "tnum";
+}
+
+@utility kicker {
+  font-family: var(--font-mono);
+  direction: ltr;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink2);
+}
+
+/* fine blueprint grid for hero / decorative panels */
+@utility grid-bg {
+  background-image:
+    linear-gradient(to left, var(--color-line2) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line2) 1px, transparent 1px);
+  background-size: 88px 88px;
+}
+
+@utility crosshair {
+  position: relative;
+}
+
+@utility text-accent-grad {
+  background: linear-gradient(100deg, var(--color-accent) 30%, var(--color-accentsoft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* skip link */
+.skip-link {
+  position: fixed;
+  inset-inline-start: 1rem;
+  top: -100px;
+  z-index: 200;
+  background: var(--color-accent);
+  color: #0d0d0d;
+  padding: 0.625rem 1rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: top 0.2s var(--ease-out-expo);
+}
+.skip-link:focus { top: 1rem; }
+
+/* Persian-friendly text helpers */
+.h-display {
+  font-weight: 900;
+  letter-spacing: 0; /* NEVER letter-space Persian */
+  text-wrap: balance;
+}
+.accent { color: var(--color-accent); }
+
+/* numbered section frame */
+.section {
+  position: relative;
+  border-top: 1px solid var(--color-line2);
+}
+.section > .cross-tl,
+.section > .cross-tr {
+  position: absolute;
+  top: -7px;
+  color: var(--color-line);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+  z-index: 1;
+}
+.section > .cross-tl { inset-inline-start: 12px; }
+.section > .cross-tr { inset-inline-end: 12px; }

@@ -1,0 +1,15 @@
+{
+  "name": "پیکسوریا — استودیوی طراحی و توسعه وب",
+  "short_name": "پیکسوریا",
+  "description": "استودیوی طراحی و توسعه وب؛ سایت، فروشگاه، سئو و هویت بصری.",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0D0D",
+  "theme_color": "#0D0D0D",
+  "icons": [
+    { "src": "/favicon/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

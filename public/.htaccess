@@ -1,0 +1,78 @@
+# ============================================================
+# PIXORIA — Apache config (cPanel / public_html)
+# Static site: no PHP, no DB. Safe headers only.
+# ============================================================
+
+# ---------- error documents ----------
+ErrorDocument 403 /403.html
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# ---------- force HTTPS ----------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ---------- optional: www -> non-www (uncomment to enable) ----------
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTP_HOST} ^www\.pixoria\.ir [NC]
+#   RewriteRule ^(.*)$ https://pixoria.ir/$1 [L,R=301]
+# </IfModule>
+
+# ---------- clean URLs: /path -> /path/index.html resolution ----------
+# Most hosts serve folder index.html automatically; if not, uncomment:
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{REQUEST_FILENAME}/index.html -f
+#   RewriteRule ^(.*?)/?$ /$1/index.html [L]
+# </IfModule>
+
+# ---------- trailing slash for folders ----------
+<IfModule mod_dir.c>
+  DirectorySlash On
+</IfModule>
+
+DirectoryIndex index.html
+
+# ---------- caching ----------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# hashed assets: immutable
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|png|svg|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+</IfModule>
+
+# ---------- compression ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---------- light security headers (won't break a static site) ----------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ---------- utf-8 ----------
+AddDefaultCharset UTF-8
