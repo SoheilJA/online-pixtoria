@@ -134,17 +134,15 @@ export function homeMain ({ services, featuredProjects, latestPosts }) {
   <section class="section" aria-label="فرآیند کار">
     <span class="cross-tl" aria-hidden="true">+</span>
     <span class="cross-tr" aria-hidden="true">+</span>
-    <div class="wrap py-16 md:py-20">
-      <div class="grid gap-10 lg:grid-cols-[280px_1fr]">
-        <div>
-          ${secHead({
-            num: '۰۶',
-            label: 'فرآیند کار',
-            en: 'PROCESS',
-            title: 'از ایده تا تحویل',
-            desc: 'فرآیند شفاف و مکتوب؛ در هر مرحله می‌دانید کجای کار ایستاده‌اید.'
-          })}
-        </div>
+    <div class="wrap">
+      ${secHead({
+        num: '۰۶',
+        label: 'فرآیند کار',
+        en: 'PROCESS',
+        title: 'از ایده تا تحویل',
+        desc: 'فرآیند شفاف و مکتوب؛ در هر مرحله می‌دانید کجای کار ایستاده‌اید.'
+      })}
+      <div class="max-w-3xl pb-20">
         ${timeline(PROCESS)}
       </div>
     </div>
