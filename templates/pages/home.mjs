@@ -121,7 +121,7 @@ export function homeMain ({ services, featuredProjects, latestPosts }) {
         title: 'پروژه‌هایی که به آن‌ها افتخار می‌کنیم',
         desc: 'گزیده‌ای از کارهای وب، اپلیکیشن و هویت بصری. پروژه‌ها نمایشی‌اند و برای نمایش توان طراحی ساخته شده‌اند.'
       })}
-      <div class="pb-6" data-stagger>
+      <div class="grid-3 pb-20" data-stagger>
         ${featuredProjects.map(p => prjCard(p)).join('')}
       </div>
       <div class="pb-20 flex justify-center" data-reveal>
@@ -232,7 +232,7 @@ export function homeMain ({ services, featuredProjects, latestPosts }) {
         title: 'تازه‌ترین نوشته‌ها',
         desc: 'راهنماهای کاربردی درباره وب، سئو و برندینگ — بدون حاشیه.'
       })}
-      <div class="pb-6" data-stagger>
+      <div class="grid-3 pb-20" data-stagger>
         ${latestPosts.map(p => postCard(p)).join('')}
       </div>
       <div class="pb-20 flex justify-center" data-reveal>
