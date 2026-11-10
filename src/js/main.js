@@ -25,11 +25,12 @@ document.querySelectorAll('[data-copy-link]').forEach(btn => {
     const url = btn.getAttribute('data-copy-link')
     try {
       await navigator.clipboard.writeText(url)
-      toast('Ù„ÛŒÙ†Ú© Ù…Ù‚Ø§Ù„Ù‡ Ú©Ù¾ÛŒ Ø´Ø¯.')
+      toast('لینک مقاله کپی شد.')
     } catch {
-      toast('Ú©Ù¾ÛŒ Ù†Ø´Ø¯ â€” Ù„ÛŒÙ†Ú© Ø±Ø§ Ø¯Ø³ØªÛŒ Ø§Ù†ØªØ®Ø§Ø¨ Ú©Ù†ÛŒØ¯.')
+      toast('کپی نشد — لینک را دستی انتخاب کنید.')
     }
   })
+})
 })
 })
 
