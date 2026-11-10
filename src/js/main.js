@@ -31,8 +31,6 @@ document.querySelectorAll('[data-copy-link]').forEach(btn => {
     }
   })
 })
-})
-})
 
 /* smooth anchor scrolling with header offset (native smooth handled by CSS) */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
